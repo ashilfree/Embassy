@@ -1,0 +1,13 @@
+<article
+        class="post type-post status-publish format-standard has-post-thumbnail hentry">
+    <div class="blogrollbox"><a href="{{ path('article', {slug: article.slug, id: article.id}) }}" class="darken"><img
+                    src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('medium')}}"
+                    class="img-responsive wp-post-image default-home-seal"
+                    alt="Independence and Youth Day" title="Independence and Youth Day"
+                    style="opacity: 1;"></a></div>
+    <h2 class="entry-title"><a href="{{ path('article', {slug: article.slug, id: article.id}) }}">{{ article.title }}</a></h2>
+    <p class="blog-meta">{{ article.stringPublishedAt }}</p>
+    <div class="entry-summary">
+        <p>{{ article.description|raw }}</p>
+    </div>
+</article>

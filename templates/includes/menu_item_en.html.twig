@@ -1,0 +1,28 @@
+<li
+    class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-has-children ubermenu-item-289 ubermenu-item-level-0 ubermenu-column ubermenu-column-auto ubermenu-has-submenu-drop ubermenu-has-submenu-mega">
+    <a class="ubermenu-target ubermenu-item-layout-default ubermenu-item-layout-text_only {{ hover? 'ubermenu-hovered' }} "
+       href="{{ pages|length == 1 ? path('page.en', {id: (pages|first).id, class: (pages|first).getEntityName()}) }}" tabindex="0"><span
+                class="ubermenu-target-title ubermenu-target-text">{{ sub_menu_name }}</span>
+        {%  if pages|length > 1 %}
+        <i class="ubermenu-sub-indicator fa fa-angle-down"></i>
+        <span class="ubermenu-sub-indicator-close"><i class="fa fa-times"></i></span>
+        {% endif %}
+    </a>
+    {%  if pages|length > 1 %}
+    <ul class="ubermenu-submenu ubermenu-submenu-id-285 ubermenu-submenu-type-auto ubermenu-submenu-type-mega ubermenu-submenu-drop ubermenu-submenu-align-left_edge_item ubermenu-autoclear ubermenu-submenu-retractor-top">
+        <li class="ubermenu-retractor ubermenu-retractor-desktop"><i
+                    class="fas fa-times"></i></li>
+        <li class="ubermenu-item ubermenu-item-type-custom ubermenu-item-object-ubermenu-custom ubermenu-item-has-children ubermenu-item-326 ubermenu-item-auto ubermenu-item-header ubermenu-item-level-1 ubermenu-column ubermenu-column-full ubermenu-has-submenu-stack">
+            <ul class="ubermenu-submenu ubermenu-submenu-id-326 ubermenu-submenu-type-auto ubermenu-submenu-type-stack">
+                {% for p in pages  %}
+                <li class="ubermenu-item ubermenu-item-type-post_type ubermenu-item-object-page ubermenu-item-471 ubermenu-item-normal ubermenu-item-level-2 ubermenu-column ubermenu-column-auto">
+                    <a class="ubermenu-target ubermenu-item-layout-default ubermenu-item-layout-text_only"
+                       href="{{ path('page.en', {id: p.id, class: p.getEntityName()}) }}">
+                        <span class="ubermenu-target-title ubermenu-target-text">{{ p.titleEn }}</span></a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+    {% endif %}
+</li>

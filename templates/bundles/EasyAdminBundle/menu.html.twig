@@ -1,0 +1,35 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% macro render_menu_item(item) %}
+        <a href="{{ item.hasSubItems? 'javascript:;' : item.linkUrl }}" class="dropdown-toggle {{ not(item.hasSubItems) ? 'no-arrow' }} {{ ea.mainMenu.isSelected(item) ? 'active' }}" target="{{ item.linkTarget }}" rel="{{ item.linkRel }}" referrerpolicy="origin-when-cross-origin">
+            {% if item.icon is not empty %}<i class="micon dw {{ item.icon }}"></i>{% endif %}
+            <span>{{ item.label }}</span>
+        </a>
+{% endmacro %}
+
+{% block main_menu_before %}{% endblock %}
+
+<ul id="accordion-menu">
+    {% block main_menu %}
+        {% for menuItem in ea.mainMenu.items %}
+            {% block menu_item %}
+                <li class="{{ menuItem.isMenuSection ? 'dropdown' }} {{ menuItem.hasSubItems ? 'dropdown' }}">
+                    {{ _self.render_menu_item(menuItem) }}
+
+                    {% if menuItem.hasSubItems %}
+                        <ul class="submenu">
+                            {% for menuSubItem in menuItem.subItems %}
+                                {% block menu_subitem %}
+                                    <li>
+                                        {{ _self.render_menu_item(menuSubItem) }}
+                                    </li>
+                                {% endblock menu_subitem %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endblock menu_item %}
+        {% endfor %}
+    {% endblock main_menu %}
+</ul>
+
+{% block main_menu_after %}{% endblock %}

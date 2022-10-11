@@ -1,0 +1,8 @@
+{% for slider in sliders  %}
+    <div class="item {% if (slider.id == 1 ) %} one active {% endif %} {% if (slider.id == 2 ) %} two {% endif %} {% if (slider.id == 3 ) %} three {% endif %}">
+        <img src="{{ vich_uploader_asset(slider, 'imageFile') }}" alt="Global Level 4 Health Advisory – Do Not Travel" title="covid-19">
+        <div class="carousel-caption">
+            <h3 class="text-center">{{ slider.captionFr }}</h3>
+        </div>
+    </div>
+{% endfor %}

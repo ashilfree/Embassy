@@ -1,0 +1,992 @@
+{# templates/bundles/EasyAdminBundle/default/layout.html.twig #}
+
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+{% block content %}
+    <div class="card-box pd-20 height-100-p mb-30">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <img src="{{ asset('assets/admin/images/banner-img.png') }}" alt="">
+            </div>
+            <div class="col-md-8">
+                <h4 class="font-20 weight-500 mb-10 text-capitalize">
+                    Welcome back
+                    <div class="weight-600 font-30 text-blue">Embassy Agent!</div>
+                </h4>
+                <p class="font-18 max-width-600">On this page you will find various statistics (daily, weekly and
+                    monthly...) in addition to that you will find below the daily list of appointments</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3 mb-30">
+            <div class="card-box height-100-p widget-style1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="progress-data">
+                        <div id="chart"></div>
+                    </div>
+                    <div class="widget-data">
+                        <div class="h4 mb-0">{{ countToday }}</div>
+                        <div class="weight-600 font-14">Today</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 mb-30">
+            <div class="card-box height-100-p widget-style1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="progress-data">
+                        <div id="chart2"></div>
+                    </div>
+                    <div class="widget-data">
+                        <div class="h4 mb-0">{{ countLastWeek }}</div>
+                        <div class="weight-600 font-14">This Week</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 mb-30">
+            <div class="card-box height-100-p widget-style1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="progress-data">
+                        <div id="chart3"></div>
+                    </div>
+                    <div class="widget-data">
+                        <div class="h4 mb-0">{{ countLastMonth }}</div>
+                        <div class="weight-600 font-14">This Month</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 mb-30">
+            <div class="card-box height-100-p widget-style1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="progress-data">
+                        <div id="chart4"></div>
+                    </div>
+                    <div class="widget-data">
+                        <div class="h4 mb-0">{{ countLastSixMonth }}</div>
+                        <div class="weight-600 font-14">Last Six Month</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6 mb-30">
+            <div class="card-box height-100-p widget-style1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="progress-data">
+                        <div id="chart6"></div>
+                    </div>
+                    <div class="widget-data">
+                        <div class="h4 mb-0">{{ connected }}</div>
+                        <div class="weight-600 font-14">Connected</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 mb-30">
+            <div class="card-box height-100-p widget-style1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <div class="progress-data">
+                        <div id="chart7"></div>
+                    </div>
+                    <div class="widget-data">
+                        <div class="h4 mb-0">{{ totalVisits }}</div>
+                        <div class="weight-600 font-14">Total Visitors</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-8 mb-30">
+            <div class="card-box height-100-p pd-20">
+                <h2 class="h4 mb-20">Activity</h2>
+                <div id="chart5"></div>
+            </div>
+        </div>
+        <div class="col-xl-4 mb-30">
+            {{ form_start(form, {'attr':{'class': 'card-box height-100-p pd-20'}}) }}
+                <h2 class="h4 mb-20">Pop Up</h2>
+                <div class="profile-picture-upload">
+                    <img src="" alt="Profile picture preview" class="imagePreview">
+                    <div class="text-center">
+                        <button class="action-button mode-upload btn btn-round btn-file">Upload PopUp</button>
+                        {{ form_widget(form.imageFile, {'attr':{'class': 'hidden'}}) }}
+                </div>
+                <div class="Container row pt-20">
+                    <div class="custom-control custom-checkbox mb-5 col-md-6">
+                        {{ form_widget(form.isShow, {'attr':{'class': 'custom-control-input'}}) }}
+                        {{ form_widget(form.isRemove, {'attr':{'class': 'hidden'}}) }}
+                        <label class="custom-control-label" for="popup_isShow">Show Pop-Up </label>
+                    </div>
+                    <div class="Controls col-md-6" data-js="controls">
+                        <button class="Controls-primary" data-js="controls-save">
+                            <span class="Controls-primary-text">Save</span>
+                            <div class="Controls-primary-inner">
+                                <div class="Controls-primary-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 25.41">
+                                        <polygon points="28.42 0 12.18 16.24 4.58 8.64 0 13.22 12.18 25.41 33 4.58 28.42 0" style="fill: #fff"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    </div>
+    <div class="card-box mb-30">
+        <h2 class="h4 pd-20">ToDay Appointments</h2>
+        <table class="table hover data-table-export nowrap">
+            <thead>
+
+            <tr>
+                <th class="table-plus datatable-nosort">ID</th>
+                <th>Civil Number</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Visit</th>
+                <th>Time</th>
+                <th class="datatable-nosort">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td class="table-plus">{{ booking.id }}</td>
+                    <td>{{ booking.civilNumber }}</td>
+                    <td>{{ booking.fullName }}</td>
+                    <td>{{ booking.phone }}</td>
+                    <td>{{ booking.visit }}</td>
+                    <td>{{ booking.schedule.startTime }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
+                               role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <style>
+        .profile-picture-upload {
+            /*display: inline;*/
+        }
+
+        .imagePreview {
+            vertical-align: middle;
+            width: auto;
+            min-width: 326px;
+            /*height: 64px;*/
+            /*border-radius: 50%;*/
+            margin: auto;
+            -webkit-box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.35);
+            -moz-box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.35);
+            box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.35);
+        }
+
+        .hidden {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            left: -999999px;
+        }
+
+        .action-button {
+            margin-top: 10px;
+            border: 1px solid black;
+            border-radius: 30px;
+            background: none;
+            padding: 8px;
+            cursor: pointer;
+            outline: 0;
+        }
+
+        .action-button.mode-upload {
+            color: #FFFFFF;
+            border-color: #b8daff;
+            background-color: #999999;
+        }
+
+        .action-button.mode-remove {
+            color: #FFFFFF;
+            border: 1px solid #f5c6cb;
+            background-color: #F44336;
+        }
+    </style>
+    <style>
+        .Controls {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: end;
+            justify-content: flex-end;
+        }
+
+        .is-Controls-success .Controls-primary-inner {
+            width: 48px;
+            background: #5294de;
+        }
+        .is-Controls-success .Controls-primary-icon {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+        .is-Controls-success .Controls-primary-text {
+            margin-right: 32px;
+        }
+        .is-Controls-success .Controls-secondary {
+            opacity: 0;
+            max-width: 0;
+            margin: 0;
+        }
+
+        .Controls-primary,
+        .Controls-secondary {
+            padding: 0;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .Controls-primary {
+            position: relative;
+            padding: 16px 26px;
+            color: #5294de;
+        }
+
+        .Controls-primary-inner {
+            position: absolute;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            right: 0;
+            border: 3px solid #5294de;
+            border-radius: 100px;
+            -webkit-transition: 0.3s width ease, 0.3s background ease;
+            transition: 0.3s width ease, 0.3s background ease;
+        }
+
+        .Controls-primary-icon {
+            width: 28px;
+            -webkit-transition: 0.3s -webkit-transform ease;
+            transition: 0.3s -webkit-transform ease;
+            transition: 0.3s transform ease;
+            transition: 0.3s transform ease, 0.3s -webkit-transform ease;
+            -webkit-transform: translateY(200%);
+            transform: translateY(200%);
+        }
+
+        .Controls-primary-text {
+            margin-right: 0;
+            -webkit-transition: 0.3s margin-right ease;
+            transition: 0.3s margin-right ease;
+        }
+
+        .Controls-secondary {
+            max-width: 100px;
+            margin-left: 24px;
+            overflow: hidden;
+            -webkit-transition: 0.3s max-width ease;
+            transition: 0.3s max-width ease;
+        }
+
+        .Container {
+            width: auto;
+        }
+    </style>
+
+{% endblock %}
+{% block body_javascript %}
+    <script type="module" src="{{ asset('assets/admin/js/apexcharts.min.js') }}"></script>
+    <script type="module">
+        var options = {
+            series: [{{ countLastWeek != 0 ? (countToday * 100) // countLastWeek : 0  }}],
+            grid: {
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+            },
+            chart: {
+                height: 100,
+                width: 70,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        size: '50%',
+                    },
+                    dataLabels: {
+                        name: {
+                            show: false,
+                            color: '#fff'
+                        },
+                        value: {
+                            show: true,
+                            color: '#333',
+                            offsetY: 5,
+                            fontSize: '15px'
+                        }
+                    }
+                }
+            },
+            colors: ['#ecf0f4'],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'diagonal1',
+                    shadeIntensity: 0.8,
+                    gradientToColors: ['#1b00ff'],
+                    inverseColors: false,
+                    opacityFrom: [1, 0.2],
+                    opacityTo: 1,
+                    stops: [0, 100],
+                }
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                active: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+            }
+        };
+
+        var options2 = {
+            series: [{{ countLastMonth != 0 ? (countLastWeek * 100) // countLastMonth : 0 }}],
+            grid: {
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+            },
+            chart: {
+                height: 100,
+                width: 70,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        size: '50%',
+                    },
+                    dataLabels: {
+                        name: {
+                            show: false,
+                            color: '#fff'
+                        },
+                        value: {
+                            show: true,
+                            color: '#333',
+                            offsetY: 5,
+                            fontSize: '15px'
+                        }
+                    }
+                }
+            },
+            colors: ['#ecf0f4'],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'diagonal1',
+                    shadeIntensity: 1,
+                    gradientToColors: ['#009688'],
+                    inverseColors: false,
+                    opacityFrom: [1, 0.2],
+                    opacityTo: 1,
+                    stops: [0, 100],
+                }
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                active: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+            }
+        };
+
+        var options3 = {
+            series: [{{ countLastSixMonth != 0 ? (countLastMonth * 100) // countLastSixMonth : 0  }}],
+            grid: {
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+            },
+            chart: {
+                height: 100,
+                width: 70,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        size: '50%',
+                    },
+                    dataLabels: {
+                        name: {
+                            show: false,
+                            color: '#fff'
+                        },
+                        value: {
+                            show: true,
+                            color: '#333',
+                            offsetY: 5,
+                            fontSize: '15px'
+                        }
+                    }
+                }
+            },
+            colors: ['#ecf0f4'],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'diagonal1',
+                    shadeIntensity: 0.8,
+                    gradientToColors: ['#f56767'],
+                    inverseColors: false,
+                    opacityFrom: [1, 0.2],
+                    opacityTo: 1,
+                    stops: [0, 100],
+                }
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                active: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+            }
+        };
+
+        var options7 = {
+            series: [{{ connected != 0 ? (connected * 100) // totalVisits : 0  }}],
+            grid: {
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+            },
+            chart: {
+                height: 100,
+                width: 70,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        size: '50%',
+                    },
+                    dataLabels: {
+                        name: {
+                            show: false,
+                            color: '#fff'
+                        },
+                        value: {
+                            show: true,
+                            color: '#333',
+                            offsetY: 5,
+                            fontSize: '15px'
+                        }
+                    }
+                }
+            },
+            colors: ['#ecf0f4'],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'diagonal1',
+                    shadeIntensity: 0.8,
+                    gradientToColors: ['#f56767'],
+                    inverseColors: false,
+                    opacityFrom: [1, 0.2],
+                    opacityTo: 1,
+                    stops: [0, 100],
+                }
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                active: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+            }
+        };
+
+        var options4 = {
+            series: [100],
+            grid: {
+                padding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                },
+            },
+            chart: {
+                height: 100,
+                width: 70,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        size: '50%',
+                    },
+                    dataLabels: {
+                        name: {
+                            show: false,
+                            color: '#fff'
+                        },
+                        value: {
+                            show: true,
+                            color: '#333',
+                            offsetY: 5,
+                            fontSize: '15px'
+                        }
+                    }
+                }
+            },
+            colors: ['#ecf0f4'],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'diagonal1',
+                    shadeIntensity: 0.8,
+                    gradientToColors: ['#2979ff'],
+                    inverseColors: false,
+                    opacityFrom: [1, 0.5],
+                    opacityTo: 1,
+                    stops: [0, 100],
+                }
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+                active: {
+                    filter: {
+                        type: 'none',
+                        value: 0,
+                    }
+                },
+            }
+        };
+        var dataArray = []
+        var monthArray = []
+        {% for row in byMonth  %}
+            dataArray.push({{ row[1] }})
+            monthArray.push(moment.monthsShort('-MMM-', {{ row[2] - 1 }}))
+        {% endfor %}
+        var options5 = {
+            chart: {
+                height: 350,
+                type: 'bar',
+                parentHeightOffset: 0,
+                fontFamily: 'Poppins, sans-serif',
+                toolbar: {
+                    show: false,
+                },
+            },
+            colors: ['#1b00ff'],
+            grid: {
+                borderColor: '#c7d2dd',
+                strokeDashArray: 5,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '25%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            series: [{
+                name: 'In Progress',
+                data: dataArray
+            }],
+            xaxis: {
+                categories: monthArray,
+                labels: {
+                    style: {
+                        colors: ['#353535'],
+                        fontSize: '16px',
+                    },
+                },
+                axisBorder: {
+                    color: '#8fa6bc',
+                }
+            },
+            yaxis: {
+                title: {
+                    text: ''
+                },
+                labels: {
+                    style: {
+                        colors: '#353535',
+                        fontSize: '16px',
+                    },
+                },
+                axisBorder: {
+                    color: '#f00',
+                }
+            },
+            legend: {
+                horizontalAlign: 'right',
+                position: 'top',
+                fontSize: '16px',
+                offsetY: 0,
+                labels: {
+                    colors: '#353535',
+                },
+                markers: {
+                    width: 10,
+                    height: 10,
+                    radius: 15,
+                },
+                itemMargin: {
+                    vertical: 0
+                },
+            },
+            fill: {
+                opacity: 1
+
+            },
+            tooltip: {
+                style: {
+                    fontSize: '15px',
+                    fontFamily: 'Poppins, sans-serif',
+                },
+                y: {
+                    formatter: function (val) {
+                        return val
+                    }
+                }
+            }
+        }
+
+        var options6 = {
+            series: [73],
+            chart: {
+                height: 350,
+                type: 'radialBar',
+                offsetY: 0
+            },
+            colors: ['#0B132B', '#222222'],
+            plotOptions: {
+                radialBar: {
+                    startAngle: -135,
+                    endAngle: 135,
+                    dataLabels: {
+                        name: {
+                            fontSize: '16px',
+                            color: undefined,
+                            offsetY: 120
+                        },
+                        value: {
+                            offsetY: 76,
+                            fontSize: '22px',
+                            color: undefined,
+                            formatter: function (val) {
+                                return val + "%";
+                            }
+                        }
+                    }
+                }
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    shadeIntensity: 0.15,
+                    inverseColors: false,
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 50, 65, 91]
+                },
+            },
+            stroke: {
+                dashArray: 4
+            },
+            labels: ['Achieve Goals'],
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+        var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+        chart2.render();
+
+        var chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
+        chart3.render();
+
+        var chart4 = new ApexCharts(document.querySelector("#chart4"), options4);
+        chart4.render();
+
+        var chart6 = new ApexCharts(document.querySelector("#chart6"), options7);
+        chart6.render();
+
+        var chart7 = new ApexCharts(document.querySelector("#chart7"), options4);
+        chart7.render();
+
+        var chart5 = new ApexCharts(document.querySelector("#chart5"), options5);
+        chart5.render();
+    </script>
+    <script>
+
+
+        let picturePreview = document.querySelector(".imagePreview");
+        let actionButton = document.querySelector(".action-button");
+        let fileInput = document.querySelector("input[name='popup[imageFile]']");
+        let fileReader = new FileReader();
+
+        const DEFAULT_IMAGE_SRC = "{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('assets/admin/images/image_placeholder.jpg') }}";
+
+            function myFunction() {
+              alert('it s done')
+            }
+
+        actionButton.addEventListener("click", (e) => {
+            e.preventDefault()
+            if (picturePreview.src !== DEFAULT_IMAGE_SRC) {
+                resetImage();
+            } else {
+                fileInput.click();
+            }
+        });
+
+        fileInput.addEventListener("change", () => {
+            refreshImagePreview();
+        });
+
+        function resetImage() {
+            setActionButtonMode("upload");
+            picturePreview.src = DEFAULT_IMAGE_SRC;
+            fileInput.value = "";
+            document.querySelector('#popup_isRemove').checked = false
+            console.log(document.querySelector('#popup_isRemove').checked)
+        }
+
+        function setActionButtonMode(mode) {
+            let modes = {
+                "upload": function () {
+                    actionButton.innerText = "Upload PopUp";
+                    actionButton.classList.remove("mode-remove");
+                    actionButton.classList.add("mode-upload");
+                },
+                "remove": function () {
+                    actionButton.innerText = "Remove PopUp";
+                    actionButton.classList.remove("mode-upload");
+                    actionButton.classList.add("mode-remove");
+                }
+            }
+            return (modes[mode]) ? modes[mode]() : console.error("unknown mode");
+        }
+
+        function refreshImagePreview() {
+            if (picturePreview.src !== DEFAULT_IMAGE_SRC) {
+                picturePreview.src = DEFAULT_IMAGE_SRC;
+            } else {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    fileReader.readAsDataURL(fileInput.files[0]);
+                    fileReader.onload = (e) => {
+                        picturePreview.src = e.target.result;
+                        setActionButtonMode("remove");
+                    }
+                }
+            }
+        }
+        {% if popup.fileName != null %}
+            picturePreview.src =  "{{ vich_uploader_asset(popup, 'imageFile') }}"
+            setActionButtonMode("remove");
+        {% else %}
+            picturePreview.src = DEFAULT_IMAGE_SRC;
+        {% endif %}
+
+         // refreshImagePreview();
+    </script>
+    <script>
+
+        const controlsSuccessClass = 'is-Controls-success';
+        const controlsElement = document.querySelector('[data-js="controls"]');
+        const controlsSaveButtonElement = document.querySelector('[data-js="controls-save"]');
+
+        controlsSaveButtonElement.addEventListener('click', function () {
+            controlsElement.classList.add(controlsSuccessClass);
+
+            window.setTimeout(() => {
+                controlsElement.classList.remove(controlsSuccessClass);
+            }, 10000);
+        });
+    </script>
+    <script>
+        async function loadUrl(url) {
+            const form = new FormData(document.querySelector('form'));
+            var data = [];
+            form.forEach((value, key) => {
+                data[key] = value;
+            });
+                init = {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
+            const request = new Request(url, init);
+            const response = await fetch(request);
+            if (response.status >= 200 && response.status < 300)
+            {
+                const res = await response.text();
+                const data = JSON.parse(res);
+                // if(data['response'] === 'check') {
+                //     arrAdmin = data['arrayAdmin']
+                //     arrCitizen = data['arrayCitizen']
+                //     if (selectedDate < new Date()) {
+                //         for (var i = 0; i < arrAdmin.length; i++) {
+                //             document.querySelectorAll('.timing').forEach(a => {
+                //                 a.setAttribute('disabled', '');
+                //                 if (a.dataset.time === arrAdmin[i]) {
+                //                     a.classList.add('selected')
+                //                 }
+                //             })
+                //         }
+                //         for (var i = 0; i < arrCitizen.length; i++) {
+                //             document.querySelectorAll('.timing').forEach(a => {
+                //                 if (a.dataset.time === arrCitizen[i]) {
+                //                     a.classList.add('selected2')
+                //                 }
+                //             })
+                //         }
+                //     } else {
+                //         for (var i = 0; i < arrAdmin.length; i++) {
+                //             document.querySelectorAll('.timing').forEach(a => {
+                //
+                //                 if (a.dataset.time === arrAdmin[i]) {
+                //                     a.setAttribute('disabled', '');
+                //                 }
+                //             })
+                //         }
+                //         for (var i = 0; i < arrCitizen.length; i++) {
+                //             document.querySelectorAll('.timing').forEach(a => {
+                //                 if (a.dataset.time === arrCitizen[i]) {
+                //                     if (!a.classList.contains('selected'))
+                //                         a.classList.add('selected')
+                //                 }
+                //             })
+                //         }
+                //     }
+                // }else{
+                //     return true
+                // }
+            }else {
+                console.error(response);
+                return false
+            }
+        }
+    </script>
+{% endblock body_javascript %}

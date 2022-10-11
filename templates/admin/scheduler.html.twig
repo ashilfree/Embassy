@@ -1,0 +1,182 @@
+{% extends ea.templatePath('layout') %}
+
+{% block head_stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/jquery.steps.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/fullcalendar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/slots.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title">
+                        <h4>Scheduling</h4>
+                    </div>
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a>Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Scheduling</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="pd-20 card-box mb-30">
+            <div class="clearfix">
+                <h4 class="text-blue h4">Scheduling Steps</h4>
+            </div>
+            <div class="wizard-content">
+                <form class="tab-wizard wizard-circle wizard">
+                    <h5>Select a Day</h5>
+                    <section>
+                        <div class="calendar-wrap mb-10">
+                            <div id='calendar'></div>
+                        </div>
+                    </section>
+                    <!-- Step 2 -->
+                    <h5>Time Slot</h5>
+                    <section>
+                        <div class="content mb-10">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-12">
+
+
+                                        <!-- Schedule Widget -->
+                                        <div class="card booking-schedule schedule-widget">
+
+                                            <!-- Schedule Content -->
+                                            <div class="schedule-cont">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+
+                                                        <!-- Time Slot -->
+                                                        <div class="time-slot">
+                                                            <ul class="clearfix">
+                                                                <li>
+                                                                    <a class="timing" href="#" data-time="08:00:00">
+                                                                        <span>08:00</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="10:30:00">
+                                                                        <span>10:30</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="14:00:00">
+                                                                        <span>14:00</span> <span>AM</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="timing" href="#" data-time="08:30:00">
+                                                                        <span>08:30</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="11:00:00">
+                                                                        <span>11:00</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="14:30:00">
+                                                                        <span>14:30</span> <span>AM</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="timing" href="#" data-time="09:00:00">
+                                                                        <span>9:00</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="11:30:00">
+                                                                        <span>11:30</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="15:00:00">
+                                                                        <span>15:00</span> <span>AM</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="timing" href="#" data-time="09:30:00">
+                                                                        <span>9:30</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="13:00:00">
+                                                                        <span>13:00</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="#" data-time="15:30:00">
+                                                                        <span>15:30</span> <span>AM</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="timing" href="#" data-time="10:00:00">
+                                                                        <span>10:00</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="" data-time="13:30:00">
+                                                                        <span>13:30</span> <span>AM</span>
+                                                                    </a>
+                                                                    <a class="timing" href="" data-time="16:00:00">
+                                                                        <span>16:00</span> <span>AM</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- /Time Slot -->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /Schedule Content -->
+
+                                        </div>
+                                        <!-- /Schedule Widget -->
+                                        <!-- /Submit Section -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- success Popup html Start -->
+        <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center font-18">
+                        <h3 class="mb-20">Data Updated!</h3>
+                        <div class="mb-30 text-center"><img src="{{ asset('assets/admin/images/success.png') }}"></div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- success Popup html End -->
+
+        <!-- Failed Popup html Start -->
+        <div class="modal fade" id="failed-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center font-18">
+                        <h3 class="mb-20">Updated Failed!</h3>
+                        <div class="mb-30 text-center"><img src="{{ asset('assets/admin/images/failed.png') }}"></div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Failed Popup html End -->
+    </div>
+    <style>
+        .fc-highli {
+            background-color: #30ea5f !important;
+        }
+    </style>
+{% endblock %}
+{% block body_javascript %}
+    <script src="{{ asset('assets/admin/js/jquery.steps.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/steps-setting.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/calendar-setting.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/slots.js') }}"></script>
+{% endblock body_javascript %}

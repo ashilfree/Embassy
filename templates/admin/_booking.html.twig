@@ -1,0 +1,12 @@
+{% for booking in bookings  %}
+    <tr>
+        <td class="table-plus">{{ booking.id }}</td>
+        <td>{{ booking.civilNumber }}</td>
+        <td>{{ booking.fullName }}</td>
+        <td>{{ booking.email }}</td>
+        <td>{{ booking.phone }}</td>
+        <td>{{ booking.visit }}</td>
+        <td>{{ booking.schedule.date|date("m/d/Y") }}</td>
+        <td>{{ booking.schedule.startTime }}</td>
+    </tr>
+{% endfor %}

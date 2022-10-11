@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="mo-breadcrumbs">
+        <div class="container">
+            <header>
+                <h1>{{ p.title }}</h1>
+            </header>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="base-box page-wrap">
+
+            <div class="entry-content" style="padding-top: 30px">
+                {{ p.content|raw }}
+            </div> <!-- entry content -->
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,480 @@
+@font-face {
+    font-family: "Neo Sans Arabic";
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    src: url("Fonts/neo-sans-arabic-regular.ttf") format("truetype");
+}
+
+.mo-flipbox-front p {
+    color: white;
+}
+
+.ubermenu-main .ubermenu-item-level-0>.ubermenu-target.ubermenu-hovered,.ubermenu-submenu .ubermenu-item>.ubermenu-target.ubermenu-hovered{
+    background-color: #efefef;
+    color: #EFC77D;
+}
+
+@media (min-width: 1200px) {
+    /* html[dir="rtl"] .ubermenu-items-align-left.ubermenu-horizontal .ubermenu-item.ubermenu-item-level-0 {
+        padding: 0 10px;
+    } */
+
+    .ubermenu .ubermenu-item.ubermenu-item-level-0>a .ubermenu-target-text {
+        font-family: "Neo Sans Arabic";
+        font-size: 22px;
+    }
+
+    .ubermenu-main .ubermenu-item-normal>a.ubermenu-target.ubermenu-item-layout-default {
+        font-size: 20px;
+    }
+
+    .mo-flipbox-front p {
+        font-size: 26px;
+    }
+
+    html[dir="rtl"] .mo-footer h3 {
+        font-size: 28px;
+    }
+
+    html[dir="rtl"] .mo-footer li {
+        font-size: 24px;
+        padding-right: 30px;
+    }
+
+    .mo-copyright .textwidget {
+        font-family: "Neo Sans Arabic";
+        font-size: 20px;
+    }
+
+    .mo-language .language,
+    .mo-language .login h4 {
+        font-family: "Neo Sans Arabic";
+        font-size: 16px;
+    }
+
+    .mo-language .login {
+        padding-top: 7px;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 993px) {
+    .ubermenu .ubermenu-item.ubermenu-item-level-0>a .ubermenu-target-text {
+        font-family: "Neo Sans Arabic";
+        font-size: 17px;
+    }
+
+    .ubermenu-main .ubermenu-item-normal>a.ubermenu-target.ubermenu-item-layout-default {
+        font-size: 16px;
+    }
+
+    .mo-flipbox-front p {
+        font-size: 22px;
+    }
+
+    html[dir="rtl"] .mo-footer h3 {
+        font-size: 24px;
+    }
+
+    html[dir="rtl"] .mo-footer li {
+        font-size: 20px;
+        padding-right: 30px;
+    }
+
+    .mo-copyright .textwidget {
+        font-family: "Neo Sans Arabic";
+        font-size: 18px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 32px;
+    }
+
+    .mo-language .language,
+    .mo-language .login h4 {
+        font-family: "Neo Sans Arabic";
+        font-size: 16px;
+    }
+
+    .mo-language .login {
+        padding-top: 7px;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 769px) {
+    .ubermenu .ubermenu-item.ubermenu-item-level-0>a .ubermenu-target-text {
+        font-family: "Neo Sans Arabic";
+        font-size: 11px;
+    }
+
+    .ubermenu-main .ubermenu-item-normal>a.ubermenu-target.ubermenu-item-layout-default {
+        font-size: 12px;
+    }
+
+    .mo-flipbox-front p {
+        font-size: 22px;
+    }
+
+    html[dir="rtl"] .mo-footer h3 {
+        font-size: 16px;
+    }
+
+    html[dir="rtl"] .mo-footer li {
+        font-size: 15px;
+        padding-right: 30px;
+    }
+
+    .mo-copyright .textwidget {
+        font-family: "Neo Sans Arabic";
+        font-size: 15px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 28px;
+    }
+
+    .mo-language .language,
+    .mo-language .login h4 {
+        font-family: "Neo Sans Arabic";
+        font-size: 14px;
+    }
+
+    .mo-language .login {
+        padding-top: 8px;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 361px) {
+
+    .mo-language .language,
+    .mo-language .login h4 {
+        font-family: "Neo Sans Arabic";
+        font-size: 12px;
+    }
+
+    .mo-language .login {
+        padding-top: 8px;
+    }
+
+    .ubermenu .ubermenu-item.ubermenu-item-level-0>a .ubermenu-target-text {
+        font-family: "Neo Sans Arabic";
+        font-size: 16px;
+    }
+
+    .ubermenu-main .ubermenu-item-normal>a.ubermenu-target.ubermenu-item-layout-default {
+        font-size: 14px;
+    }
+
+    .mo-flipbox-front p {
+        font-size: 18px;
+    }
+
+    html[dir="rtl"] .mo-footer h3 {
+        font-size: 25px;
+    }
+
+    html[dir="rtl"] .mo-footer li {
+        font-size: 22px;
+        padding-right: 30px;
+    }
+
+    .mo-copyright .textwidget {
+        font-family: "Neo Sans Arabic";
+        font-size: 14px;
+    }
+}
+@media (max-width: 360px) {
+
+    .mo-language .language,
+    .mo-language .login h4 {
+        font-family: "Neo Sans Arabic";
+        font-size: 08px;
+    }
+
+    .mo-language .login {
+        padding-top: 8px;
+    }
+
+    .ubermenu .ubermenu-item.ubermenu-item-level-0>a .ubermenu-target-text {
+        font-family: "Neo Sans Arabic";
+        font-size: 16px;
+    }
+
+    .ubermenu-main .ubermenu-item-normal>a.ubermenu-target.ubermenu-item-layout-default {
+        font-size: 14px;
+    }
+
+    .mo-flipbox-front p {
+        font-size: 18px;
+    }
+
+    html[dir="rtl"] .mo-footer h3 {
+        font-size: 14px;
+    }
+
+    html[dir="rtl"] .mo-footer li {
+        font-size: 18px;
+        padding-right: 30px;
+    }
+
+    .mo-copyright .textwidget {
+        font-family: "Neo Sans Arabic";
+        font-size: 9px;
+    }
+}
+
+
+/* ******************************************************* */
+
+.wdpu-8112 {
+    position: fixed;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0 54px 0 50px;
+}
+.wdpu-8112.rounded .wdpu-msg {
+    border-radius: 10px;
+}
+
+
+.wdpu-8112 a:visited {
+    color: #488CFD;
+}
+.wdpu-8112 .wdpu-close {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 30px;
+    height: 30px;
+    text-decoration: none;
+    opacity: .9;
+    z-index: 10;
+    background: transparent url('../images/close.png') no-repeat;
+}
+
+.wdpu-8112 a {
+    color: #488CFD;
+    text-decoration: underline;
+    opacity: .9;
+}
+.wdpu-8112.rounded .wdpu-msg-inner {
+    border-radius: 6px;
+}
+.wdpu-8112 .wdpu-msg-inner {
+    margin: 0px auto;
+    background: #F2F2F2;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    height: 100%;
+}
+.wdpu-8112 .wdpu-msg {
+    position: relative;
+    display: block;
+    margin: 0 auto 30px;
+    text-align: left;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.3);
+    font-size: 15px;
+    max-width: 800px;
+    min-width: 100px;
+}
+.wdpu-8112.no-img .wdpu-text {
+    margin: 0;
+    width: 100%;
+}
+.wdpu-8112 .wdpu-text {
+    margin: 0 40% 0 0;
+    width: 60%;
+}
+.wdpu-8112 .wdpu-text {
+    padding: 20px 20px 64px;
+    background: #F2F2F2;
+    position: relative;
+    z-index: 10;
+    height: 100%;
+}
+.wdpu-8112 .wdpu-text, .wdpu-8112 .wdpu-image {
+    vertical-align: middle;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.wdpu-8112 .wdpu-inner {
+    overflow: auto;
+    height: 100%;
+}
+.wdpu-8112.no-title.no-subtitle .wdpu-head {
+    display: none;
+}
+.wdpu-8112 .wdpu-head {
+    border-bottom: 1px solid #DDD;
+    padding-bottom: .5em;
+    margin-bottom: 1em;
+}
+.wdpu-8112.no-title .wdpu-title {
+    display: none;
+}
+.wdpu-8112 .wdpu-title {
+    font-weight: bold;
+}
+.wdpu-8112 .wdpu-title, .wdpu-8112 .wdpu-subtitle {
+    font-size: 22.5px;
+    line-height: 1.3em;
+    margin: 0 0 .5em 0;
+    color: #488CFD;
+}
+.wdpu-8112.no-subtitle .wdpu-subtitle {
+    display: none;
+}
+.wdpu-8112 .wdpu-subtitle {
+    font-weight: 100;
+}
+.wdpu-8112 .wdpu-msg p:first-child {
+    margin-top: 0;
+}
+.wdpu-8112 .wdpu-msg p {
+    font-size: 15px;
+}
+.wdpu-8112 a {
+    color: #488CFD;
+    text-decoration: underline;
+    opacity: .9;
+}
+.wdpu-8112 a:visited {
+    color: #488CFD;
+}
+.aligncenter {
+    margin: auto;
+    float: none;
+}
+.aligncenter {
+    margin-left: auto;
+    margin-right: auto;
+}
+img.aligncenter {
+    display: block;
+    margin-bottom: 15px;
+}
+.no-touch a img {
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -ms-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+    -moz-backface-visibility: hidden;
+    outline: 1px solid transparent;
+}
+.wdpu-8112 .wdpu-buttons {
+    position: absolute;
+    padding: 20px;
+    height: 24px;
+    margin: 0 -20px -20px;
+    white-space: nowrap;
+}
+
+/* DOCUMENT */
+
+.widget.widget_wpdm_topdls_widget {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 21px;
+    position: relative;
+}
+.widget .widget-head {
+    background: #f8f8f8;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eaeaea;
+    margin: -20px;
+    margin-bottom: 20px;
+}
+
+.widget .widget-title {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    background: url(../images/nb-dots.png) repeat;
+}
+.widget .widget-title span {
+    padding-right: 0px;
+    padding-left: 11px;
+    position: relative;
+    background: #f8f8f8;
+    top: 1px;
+    padding-top: 2px;
+}
+.wpdm-category {
+    border: 0px;
+    border-bottom: 0px solid #ccc;
+}
+.wpdm-category .link-btn {
+    margin: 3px 0 !important;
+    width: 100%;
+    display: block;
+}
+.w3eden .link-btn {
+    border: 1px solid #cccccc;
+    padding: 6px;
+    display: block;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 13px;
+}
+
+.w3eden .media:first-child {
+    margin-top: 0;
+}
+.w3eden .media, .w3eden .media-body {
+    overflow: hidden;
+    zoom: 1;
+}
+.w3eden .media>.pull-left {
+    margin-right: 10px;
+}
+.w3eden .pull-left {
+    float: left !important;
+}
+.w3eden .link-btn * {
+    text-decoration: none !important;
+    line-height: normal !important;
+}
+.sidebar .widget:not(.textwidget) img:not(.wp-smily) {
+    margin-bottom: 0;
+}
+.w3eden .link-btn .wpdm_icon {
+    width: 40px;
+}
+
+.w3eden .ptitle {
+    font-size: 12pt;
+    margin-bottom: 3px;
+    display: block;
+}
+.w3eden .link-btn .label-default {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border-radius: 2px !important;
+    line-height: 20px !important;
+    padding: 4px 6px !important;
+}
+.w3eden .label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}

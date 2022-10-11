@@ -1,0 +1,23 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        article_image:
+            uri_prefix: '%app.path.images%'
+            upload_destination: '%kernel.project_dir%/public%app.path.images%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        popup_image:
+            uri_prefix: '%app.path.images.popup%'
+            upload_destination: '%kernel.project_dir%/public%app.path.images.popup%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        document_file:
+            uri_prefix: '%app.path.uploads%'
+            upload_destination: '%kernel.project_dir%/public%app.path.uploads%'
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'

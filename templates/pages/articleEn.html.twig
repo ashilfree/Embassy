@@ -1,0 +1,70 @@
+{% extends 'baseEn.html.twig' %}
+{% block body %}
+    <div class="container fp-slider">
+        <div id="carousel-example-generic" class="carousel slide fp-slider" data-ride="carousel" data-wrap="false"
+             data-pause="hover">
+            <div class="carousel-inner">
+                {{ include('includes/_slider_en.html.twig') }}
+                <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                   data-slide="prev">&nbsp;<span class="glyphicon glyphicon-chevron-left"></span></a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                   data-slide="next">&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+    <div id="main" class="wrap container mo-background" role="document">
+
+        <div class="content row">
+            <main class="main article">
+                <div class="mo-page-content homepage-tp">
+                    <div class="mo-front-page">
+                        <div class="mo-home-widgets">
+                            <div class="mo-frontpage-widgets widget text-5 widget_text">
+                                <div class="textwidget">
+                                    <div class="mo-flipbox">
+                                        <a href="{{ path('document') }}" class="flipbox-href">
+                                            <div class="mo-flipbox-front">
+                                                <i class="fa fa-file-o fa-lg"></i>
+                                                <p>Important documents</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="mo-flipbox"><a href="#" class="flipbox-href">
+                                            <div class="mo-flipbox-front"><i class="fa fa-calendar fa-lg"></i>
+                                                <p>Book appointments</p>
+                                            </div>
+                                        </a></div>
+                                    <div class="mo-flipbox"><a href="#" class="flipbox-href">
+                                            <div class="mo-flipbox-front"><i class="fa fa-map-signs fa-lg"></i>
+                                                <p>Helpful hints and tips</p>
+                                            </div>
+                                        </a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="background-color: #E6E6E6;padding:10px">
+                            <h1 class="text-center">News</h1>
+                            <div class="blogrollcontent mainroll">
+                                <article
+                                        class="post type-post status-publish format-standard has-post-thumbnail hentry">
+                                    <div class="blogrollbox"><a class="darken"><img
+                                                    src="{{ vich_uploader_asset(article, 'imageFile') }}"
+                                                    class="img-responsive wp-post-image default-home-seal"
+                                                    alt="Independence and Youth Day" title="Independence and Youth Day"
+                                                    style="opacity: 1;"></a></div>
+                                    <h2 class="entry-title">{{ article.titleEn }}</h2>
+                                    <p class="blog-meta">{{ article.stringPublishedAt }}</p>
+                                    <div class="entry-summary">
+                                        <p>{{ article.descriptionEn|raw }}</p>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div><!-- /.content -->
+{% endblock %}
+

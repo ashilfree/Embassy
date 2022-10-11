@@ -1,0 +1,79 @@
+{% extends 'baseEn.html.twig' %}
+
+{% block body %}
+    <div class="mo-breadcrumbs">
+        <div class="container">
+            <header>
+                <h1>Book an appointment with the ambassador</h1>
+            </header>
+        </div>
+    </div>
+    <div class="container">
+        {{ form_start(form, {'attr':{'class': 'form-group', 'onsubmit': 'setFormSubmitting()'}}) }}
+        <h3 style="margin: 20px 0">To make an appointment with His Excellency the Ambassador, fill out the form below</h3>
+        <div class="form-group">
+            <label for="first_name">Full name</label>
+            {{ form_widget(form.name, {'attr':{'class': 'form-control', 'autocomplete': 'on', 'autofocus':''}}) }}
+            <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Civil number</label>
+            {{ form_widget(form.civilNumber, {'attr':{'class': 'form-control', 'autocomplete': 'on', 'autofocus':''}}) }}
+            <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="email_address">Email</label>
+            {{ form_widget(form.email, {'attr':{'class': 'form-control'}}) }}
+            <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Phone</label>
+            {{ form_widget(form.phone, {'attr':{'class': 'form-control'}}) }}
+            <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="age">Reason</label>
+            {{ form_widget(form.reason, {'attr':{'class': 'form-control'}}) }}
+            <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="dob">Desired day</label>
+            {{ form_widget(form.date, {'attr':{'class': 'form-control'}}) }}
+            <span class="help-block"></span>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Ask for appointment</button>
+        {{ form_end(form) }}
+    </div>
+    <script>
+        var a, formSubmitting = false;
+        var c = "{{ app.request.uri ~ '#step-1' }}"
+        var setFormSubmitting = function () {
+            formSubmitting = true;
+        };
+
+        window.onload = function () {
+            window.addEventListener("beforeunload", function (e) {
+                if (formSubmitting) {
+                    return undefined;
+                }
+                debugger
+                var confirmationMessage = 'It looks like you have been editing something. '
+                    + 'If you leave before saving, your changes will be lost.';
+                (e || window.event).returnValue = confirmationMessage;
+
+                return confirmationMessage;
+            });
+            window.location.replace(c);
+        };
+    </script>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $("#booking_with_ambassador_date").datepicker();
+        });
+    </script>
+{% endblock %}

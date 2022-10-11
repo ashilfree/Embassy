@@ -1,0 +1,11 @@
+{% for booking in bookings  %}
+    <tr>
+        <td class="table-plus">{{ booking.id }}</td>
+        <td>{{ booking.civilNumber }}</td>
+        <td>{{ booking.name }}</td>
+        <td>{{ booking.email }}</td>
+        <td>{{ booking.phone }}</td>
+        <td>{{ booking.reason }}</td>
+        <td>{{ booking.date }}</td>
+    </tr>
+{% endfor %}

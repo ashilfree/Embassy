@@ -1,0 +1,13 @@
+easy_admin:
+  entities:
+    Slider:
+      class: App\Entity\Slider
+      list:
+        fields: ['id', 'caption', {property: 'fileName', label: 'Image', type: 'image', base_path: '%app.path.images%'}]
+        actions: ['new', 'edit', '-delete']
+      edit:
+        actions: ['-delete', '-edit']
+      form:
+        fields:
+          - {property: 'caption'}
+          - {property: 'imageFile', type: 'vich_image'}

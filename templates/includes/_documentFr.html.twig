@@ -1,0 +1,14 @@
+<div class="wpdm-link-tpl link-btn [color]">
+    <div class="media">
+        <a href="{{ '/uploads/documents/' ~ document.brochure }}" class="pull-right">
+            <img class="wpdm_icon disappear appear" src="{{ '/assets/images/pdf.png' }}" >
+        </a>
+
+        <div class="media-body">
+            <strong class="ptitle"> {{ document.nameEn|capitalize }} <span class="label label-default" style="font-weight: 400;">{{ document.size|readable_filesize }}</span> {{ document.nameAr }} </strong>
+            <div><strong><a class="wpdm-download-link wpdm-download-locked [btnclass]" rel="noindex nofollow" href="{{ '/uploads/documents/' ~ document.brochure }}"><i
+                                class=""></i>Download</a></strong></div>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>

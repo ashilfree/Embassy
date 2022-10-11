@@ -1,0 +1,14 @@
+easy_admin:
+  entities:
+    Document:
+      class: App\Entity\Document
+      list:
+        fields: ['id', {property: 'name_ar', label: 'اسم الملف'}, {property: 'name_en', label: 'document name'}, {property: 'brochure', template: 'admin/brochure.html.twig' , base_path: '%app.path.uploads%'}]
+        actions: ['new', 'edit', 'delete']
+      edit:
+        actions: ['-delete', '-edit']
+      form:
+        fields:
+          - {property: 'name_ar', label: 'اسم الملف'}
+          - {property: 'name_en', label: 'document name'}
+          - {property: 'brochureFile', type: 'vich_file'}

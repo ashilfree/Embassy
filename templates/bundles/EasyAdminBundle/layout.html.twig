@@ -1,0 +1,285 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% trans_default_domain ea.i18n.translationDomain %}
+
+<!DOCTYPE html>
+<html lang="{{ ea.i18n.htmlLocale }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, noimageindex, notranslate, nocache" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="generator" content="EasyAdmin" />
+
+    <title>{% block page_title %}{{ block('content_title')|striptags|raw }}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/core.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/icon-font.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/dataTables.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/responsive.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css') }}" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+    {% block head_stylesheets %}
+{#        <link rel="stylesheet" href="{{ asset('bundles/easyadmin/app.css') }}">#}
+    {% endblock %}
+
+    {% block configured_stylesheets %}
+        {% for css_asset in ea.assets.cssFiles ?? [] %}
+            <link rel="stylesheet" href="{{ asset(css_asset) }}">
+        {% endfor %}
+    {% endblock %}
+
+    {% block head_favicon %}
+        <link rel="shortcut icon" href="{{ asset(ea.dashboardFaviconPath) }}">
+    {% endblock %}
+
+    {% block head_javascript %}
+{#        <script src="{{ asset('bundles/easyadmin/app.js') }}"></script>#}
+        <script src="{{ asset('assets/admin/js/core.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/script.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/process.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/layout-settings.js') }}"></script>
+
+        <script src="{{ asset('assets/admin/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/responsive.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/datatable-setting.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/buttons.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/buttons.flash.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/vfs_fonts.js') }}"></script>
+        <!-- Datatable Setting js -->
+
+    {% endblock head_javascript %}
+
+    {% if 'rtl' == ea.i18n.textDirection %}
+{#        <link rel="stylesheet" href="{{ asset('bundles/easyadmin/app-rtl.css') }}">#}
+    {% endif %}
+
+    {% block configured_head_contents %}
+        {% for htmlContent in ea.assets.headContents ?? [] %}
+            {{ htmlContent|raw }}
+        {% endfor %}
+    {% endblock %}
+</head>
+
+{% block body %}
+    <body id="{% block body_id %}{% endblock %}" class="ea {% block body_class %}{% endblock %}">
+    <div class="pre-loader">
+        <div class="pre-loader-box">
+            <div class="loader-logo"><img src="{{ '/assets/admin/images/logo-black.png' }}" alt=""></div>
+            <div class='loader-progress' id="progress_div">
+                <div class='bar' id='bar1'></div>
+            </div>
+            <div class='percent' id='percent1'>0%</div>
+            <div class="loading-text">
+                Loading...
+            </div>
+        </div>
+    </div>
+    <script>
+        document.body.classList.add(
+            'ea-content-width-' + (localStorage.getItem('ea/content/width') || 'normal'),
+            'ea-sidebar-width-' + (localStorage.getItem('ea/sidebar/width') || 'normal')
+        );
+    </script>
+
+    {% block wrapper_wrapper %}
+        {% block flash_messages %}
+            {{ include(ea.templatePath('flash_messages')) }}
+        {% endblock flash_messages %}
+
+        <div class="wrapper">
+            {% block wrapper %}
+
+                <div class="header">
+                    <div class="header-left">
+                        {% set sort_field_name = app.request.get('sort')|keys|first %}
+                        {% set sort_order = app.request.get('sort')|first %}
+                        {% set some_results_are_hidden = false %}
+                        {% set has_search = true %}
+                        {% set has_datagrid_tools = has_search or has_filters %}
+                        {% if has_datagrid_tools %}
+                        <div class="menu-icon dw dw-menu"></div>
+                        <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+                            {% block search %}
+                            {% if has_search %}
+                        <div class="header-search">
+                            <form method="get">
+                                {% block search_form %}
+                                    {# reset the referrer and page number whenever a new query is performed #}
+                                    {% set query_parameters = ea.request.query.all|merge({
+                                        referrer: null, page: 1,
+                                    }) %}
+
+                                    {# browsers remove the query string when submitting forms using GET;
+                                       that's why all query string parameters are added as hidden form fields #}
+                                    {% for paramName, paramValue in query_parameters|ea_flatten_array %}
+                                        <input type="hidden" name="{{ paramName }}" value="{{ paramValue }}">
+                                    {% endfor %}
+
+                                    <div class="form-group mb-0">
+                                        <i class="dw dw-search2 search-icon"></i>
+                                            <input class="form-control search-input" type="search" name="query" value="{{ app.request.get('query') ?? '' }}" placeholder="{{ 'action.search'|trans(ea.i18n.translationParameters, 'EasyAdminBundle') }}">
+                                        <div class="dropdown">
+                                            <button class="dropdown-toggle no-arrow" type="submit">
+                                                <i class="icon-copy ion-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endblock %}
+                            </form>
+                        </div>
+                            {% endif %}
+                            {% endblock search %}
+{#                            <div class="datagrid-filters">#}
+{#                                {% block filters %}#}
+{#                                    {% if filters|length > 0 %}#}
+{#                                        {% set applied_filters = ea.request.query.get('filters')|default([])|keys %}#}
+{#                                        <div class="btn-group action-filters">#}
+{#                                            <a href="{{ ea_url().setAction('renderFilters').includeReferrer() }}" class="btn btn-secondary btn-labeled btn-labeled-right action-filters-button {{ applied_filters ? 'action-filters-applied' }}" data-modal="#modal-filters">#}
+{#                                                <i class="fa fa-filter fa-fw"></i> {{ 'filter.title'|trans(ea.i18n.translationParameters, 'EasyAdminBundle') }}{% if applied_filters %} <span class="text-primary">({{ applied_filters|length }})</span>{% endif %}#}
+{#                                            </a>#}
+{#                                            {% if applied_filters %}#}
+{#                                                <a href="{{ ea_url().unset('filters') }}" class="btn btn-secondary action-filters-reset">#}
+{#                                                    <i class="fa fa-close"></i>#}
+{#                                                </a>#}
+{#                                            {% endif %}#}
+{#                                        </div>#}
+{#                                    {% endif %}#}
+{#                                {% endblock filters %}#}
+{#                            </div>#}
+                        {% endif %}
+                    </div>
+
+                    <div class="header-right">
+                        <div class="user-info-dropdown">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="{{ '/assets/admin/images/avatar.png' }}" alt="">
+						</span>
+                                    <span class="user-name">{{ ea.userMenu.name }}</span>
+                                </a>
+                                {% block user_menu %}
+                                    {% if ea.userMenu.items|length > 0 %}
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            {% for item in ea.userMenu.items %}
+                                                <a href="{{ item.linkUrl }}" class="dropdown-item" target="{{ item.linkTarget }}" rel="{{ item.linkRel }}" referrerpolicy="origin-when-cross-origin">
+                                                    {% if item.icon is not empty %}<i class="dw dw-logout"></i>{% endif %}
+                                                    <span>{{ item.label }}</span>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endblock user_menu %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="left-side-bar">
+                    <div class="brand-logo">
+                        <a href="{{ path(ea.dashboardRouteName) }}">
+                            <img src="{{ '/assets/admin/images/deskapp-logo.svg' }}" alt="" class="dark-logo">
+                            <img src="{{ '/assets/admin/images/logo-white.png' }}" alt="" class="light-logo">
+                        </a>
+                        <div class="close-sidebar" data-toggle="left-sidebar-close">
+                            <i class="ion-close-round"></i>
+                        </div>
+                    </div>
+                    <div class="menu-block customscroll">
+                        <div class="sidebar-menu">
+                            {% block main_menu_wrapper %}
+                                {{ include(ea.templatePath('main_menu')) }}
+                            {% endblock main_menu_wrapper %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mobile-menu-overlay"></div>
+                <div class="main-container">
+                    <div class="pd-ltr-20 xs-pd-20-10">
+                        {% block content %}
+                            <div class="min-height-200px">
+                                {% block content_header_wrapper %}
+                                    {% set has_help_message = (ea.crud.helpMessage ?? '') is not empty %}
+                                    <section class="page-header">
+                                        {% block content_header %}
+
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    {% set foo  %}
+                                                        {% block content_title %}{% endblock %}
+                                                    {% endset  %}
+                                                    <div class="title">
+                                                        <h4> {{ foo }}</h4>
+                                                    </div>
+                                                    <nav aria-label="breadcrumb" role="navigation">
+                                                        <ol class="breadcrumb">
+                                                            <li class="breadcrumb-item"><a href="">Home</a></li>
+                                                            <li class="breadcrumb-item active" aria-current="page">{{ foo }}</li>
+                                                        </ol>
+                                                    </nav>
+                                                </div>
+
+                                                {% block page_actions_wrapper %}
+                                                    <div class="col-md-6 col-sm-12 text-right">{% block page_actions %}{% endblock %}</div>
+                                                {% endblock %}
+                                            </div>
+                                        {% endblock content_header %}
+                                    </section>
+                                {% endblock content_header_wrapper %}
+
+                                <section id="main" class="card-box mb-30">
+                                    {% block main %}{% endblock %}
+                                </section>
+
+                                {% block content_footer_wrapper %}
+                                    {% set content_footer = block('content_footer') is defined ? block('content_footer') : '' %}
+                                    {% if content_footer is not empty %}
+                                        <section class="content-footer">
+                                            {{ content_footer }}
+                                        </section>
+                                    {% endif %}
+                                {% endblock %}
+                            </div>
+                        {% endblock content %}
+                        <div class="footer-wrap pd-20 mb-20 card-box">
+                            Algeria Embassy - Control Panel <a href="http://algerianembassy-kuwait.org/" target="_blank">Main WebSite</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                </div>
+            {% endblock wrapper %}
+        </div>
+    {% endblock wrapper_wrapper %}
+
+    {% block body_javascript %}{% endblock body_javascript %}
+
+    {% block configured_javascripts %}
+        {% for js_asset in ea.assets.jsFiles ?? [] %}
+            <script src="{{ asset(js_asset) }}"></script>
+        {% endfor %}
+    {% endblock %}
+
+    {% block configured_body_contents %}
+        {% for htmlContent in ea.assets.bodyContents ?? [] %}
+            {{ htmlContent|raw }}
+        {% endfor %}
+    {% endblock %}
+    </body>
+{% endblock body %}
+</html>

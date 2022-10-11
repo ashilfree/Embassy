@@ -1,0 +1,29 @@
+easy_admin:
+  design:
+    menu:
+      - {label: 'ENTITIES'}
+      - { label: 'Dashboard', route: 'easyadmins', default: true, icon: 'home' }
+      - {entity: 'Article', icon: 'tags'}
+      - {entity: 'Slider', icon: 'tags'}
+      - {entity: 'Document', icon: 'tags'}
+      - {entity: 'Scheduler', icon: 'tags'}
+      - {label: 'SETTINGS'}
+      - {entity: 'User', icon: 'user', permission: 'ROLE_USER'}
+    assets:
+      css:
+        - https://cdn.jsdelivr.net/npm/zebra_datepicker@latest/dist/css/default/zebra_datepicker.min.css
+        - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css
+        - assets/back/css/select2.css
+        - assets/back/css/ct.css
+      js:
+        - https://cdn.jsdelivr.net/npm/zebra_datepicker@latest/dist/zebra_datepicker.min.js
+        - assets/js/script.js
+        - assets/back/js/popper.js
+        - assets/back/js/bootstrap.js
+        - assets/back/js/app-style-switcher.js
+        - assets/back/js/perfect-scrollbar.jquery.min.js
+        - assets/back/js/feather.js
+        - assets/back/js/sidebar.js
+        - assets/back/js/custom.js
+#      form_theme: 'form/fields.html.twig'
+

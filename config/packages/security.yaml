@@ -1,0 +1,56 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        citizen_users:
+            entity:
+                class: App\Entity\Citizen
+                property: username
+        admin_users:
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            pattern:            /admin
+            provider:  admin_users
+            anonymous: true
+            logout:
+                path: /admin/logout
+                target: /admin
+            form_login:
+                login_path: /admin/login
+                check_path: admin.login
+                use_referer: true
+            user_checker: App\Security\UserEnableChecker
+
+        main:
+            pattern:            /
+            anonymous: true
+            provider:       citizen_users
+            logout:
+                path: /logout
+                target: /login
+            form_login:
+                login_path:     /login
+                check_path:     login
+                default_target_path: shopping.cart
+            remember_me:
+                secret: '%env(APP_SECRET)%'
+                lifetime: 1209600 # 2 weeks in seconds
+            user_checker: App\Security\CitizenEnableChecker
+    access_control:
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_USER }
+        - { path: ^/shopping-cart, roles: ROLE_CITIZEN }
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+        App\Entity\Citizen:
+            algorithm: bcrypt
+            cost: 12

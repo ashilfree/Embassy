@@ -1,0 +1,9 @@
+easy_admin:
+  entities:
+    User:
+      class: App\Entity\User
+      list:
+        item_permission: 'ROLE_ADMIN'
+        fields: ['id', 'username', 'roles', 'enabled']
+        actions: ['show', 'edit', 'delete', 'change']
+        filters: ['enabled']

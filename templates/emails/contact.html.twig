@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style type="text/css">
+        #outlook a {
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table, td {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+        }
+
+        p {
+            display: block;
+            margin: 13px 0;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700" rel="stylesheet" type="text/css">
+    <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Lato:300,400,500,700);</style>
+    <!--<![endif]-->
+    <style type="text/css">@media only screen and (min-width: 480px) {
+            .mj-column-per-33 {
+                width: 33% !important;
+                max-width: 33%;
+            }
+
+            .mj-column-per-66 {
+                width: 66% !important;
+                max-width: 66%;
+            }
+
+            .mj-column-per-100 {
+                width: 100% !important;
+                max-width: 100%;
+            }
+
+            .mj-column-per-33-333333333333336 {
+                width: 33.333333333333336% !important;
+                max-width: 33.333333333333336%;
+            }
+        }</style>
+    <style type="text/css">@media only screen and (max-width: 480px) {
+            table.mj-full-width-mobile {
+                width: 100% !important;
+            }
+
+            td.mj-full-width-mobile {
+                width: auto !important;
+            }
+        }</style>
+</head>
+<body style="background-color:#e0f2ff;">
+<div style="background-color:#e0f2ff;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600">
+        <tr>
+            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+                <div style="margin:0px auto;max-width:600px;">
+                    <img style="max-width:600px;" src="http://mohammed.algerianembassy-kuwait.org/assets/images/header.png" alt="">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;text-align: center;font-size: 24px;line-height: 40px;background-color: white" width="600">
+        <tr>
+            <td style="color: red;font-size: 30px;line-height: 50px;text-align: center" colspan="2">بيانات الحجز</td>
+        </tr>
+        <tr>
+            <td id="fullName">{{ booking.fullName }}</td>
+            <td scope="row">الاسم</td>
+        </tr>
+        <tr>
+            <td id="civilNumber">{{ booking.civilNumber }}</td>
+            <td scope="row">الرقم المدني</td>
+        </tr>
+        <tr>
+            <td id="email">{{ booking.email }}</td>
+            <td scope="row">البريد الالكتروني</td>
+        </tr>
+        <tr>
+            <td id="phone">{{ booking.phone }}</td>
+            <td scope="row">رقم الهاتف</td>
+        </tr>
+        <tr>
+            <td id="date">{{ scheduler.date|date("m/d/Y") }}</td>
+            <td scope="row">تاريخ الحجز</td>
+        </tr>
+        <tr>
+            <td id="time">{{ scheduler.startTime }}</td>
+            <td scope="row">توقيت حجز الموعد</td>
+        </tr>
+        <tr>
+            <td id="visit">{{ booking.visit }}</td>
+            <td scope="row">سبب حجز الموعد</td>
+        </tr>
+    </table>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600">
+        <tr>
+            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+                <div style="margin:0px auto;max-width:600px;">
+                    <img style="max-width:600px;" src="http://mohammed.algerianembassy-kuwait.org/assets/images/header-background.png" alt="">
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+
+</body>
+</html>

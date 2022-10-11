@@ -1,0 +1,6 @@
+easy_admin:
+  entities:
+    Scheduler:
+      class: App\Entity\Scheduler
+      templates:
+        list: 'admin/customizations/customer_list.html.twig'

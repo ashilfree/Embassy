@@ -1,0 +1,117 @@
+{% extends 'baseEn.html.twig' %}
+
+{% block body %}
+    <div class="mo-breadcrumbs">
+        <div class="container">
+            <header>
+                <h1>Book appointments</h1>
+            </header>
+        </div>
+    </div>
+
+    <div class="container">
+        <div style="margin-top:40px" class="row">
+            <div class="col-md-6">
+                <div class="content m-5">
+                    <a href="{{ path('booking.appointments.en') }}">
+                        <div class="content-overlay"></div>
+                        <img class="content-image" src="{{ asset('assets/images/makebookings.jpg') }}">
+                        <div class="content-details">
+                            <h3 class="content-title">Normal Appointment<i class="fa fa-arrow-right arrow"></i></h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="content m-5">
+                    <a href="{{ path('booking.appointments.with.ambassador.en') }}">
+                        <div class="content-overlay"></div>
+                        <img class="content-image" src="{{ asset('assets/images/handshake.jpg') }}">
+                        <div class="content-details">
+                            <h3 class="content-title">Appointment with the ambassador<i class="fa fa-arrow-right arrow"></i></h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .content {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .content .content-overlay {
+            background: rgba(00,45,114,0.8);
+            position: absolute;
+            height: 99%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            -webkit-transition: all 0.4s ease-in-out 0s;
+            -moz-transition: all 0.4s ease-in-out 0s;
+            transition: all 0.4s ease-in-out 0s;
+        }
+
+        .content:hover .content-overlay{
+            opacity: 1;
+        }
+
+        .content-image{
+            width: 100%;
+        }
+
+        .content-details {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            top: 50%;
+        }
+
+        .content-details h3{
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5em;
+            text-transform: uppercase;
+        }
+
+        .arrow {
+            margin-left: 8px;
+        }
+
+        .content h3 {
+            display: inline-block;
+            position: relative;
+            transition: all 300ms ease-out;
+            will-change: transform;
+        }
+
+        .content:hover h3 {
+            -webkit-transform: translate3d(-1rem, 0, 0);
+            transform: translate3d(-1rem, 0, 0);
+        }
+        .content i {
+            position: absolute;
+            width: 1.1em;
+            right: -1.4rem;
+            opacity: 1;
+            top: 38%;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            transition: all 300ms ease-out;
+            will-change: right, opacity;
+        }
+
+        .content:hover i {
+            opacity: 1;
+            right: -3rem;
+        }
+    </style>
+{% endblock %}

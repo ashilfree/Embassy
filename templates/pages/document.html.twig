@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="mo-breadcrumbs">
+        <div class="container">
+            <header>
+                <h1>وثائق مهمة</h1>
+            </header>
+        </div>
+    </div>
+    <div class="container">
+    <div class="widget widget_wpdm_topdls_widget">
+        <div class="widget-head"><h3 class="widget-title"><span> الشؤون القنصلية:  وثائق مهمة </span></h3></div>
+        <div class="w3eden wpdm-category">
+            {% for document in documents %}
+                {%  include 'includes/_document.html.twig'  %}
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
